@@ -7,13 +7,13 @@ int main(int argc, char** argv) {
 	using namespace lsys;
 	/** Two (production) rules r1 and r2 which goes from A to [AB] and B to A respectively.
 		The lambdas define how parameters of the predecessor carry over to the successor.
-		The last parameter is the weight of the production rule. A higher weight makes the
-		rule more probable for selection.
 		Here "[](Params p) -> Params { return {0.5f*p[0], 0.5f*p[0]}; }, 1.0f}" seem arcane.
 		Fear not, in plain english this means:
 			"The first parameter of the successor is half of first parameter of predecessor,
 			 the second parameter of the successor is half of the first parameter of predecessor,
-			 the third parameter of the successor is 1" **/
+			 the third parameter of the successor is 1"
+		If there are several rules with the same predecessor, then the last parameter is the
+		weight. The heavier the stochastic rule is, the more likely it is for selection. **/
 	Rule r1 = {'A', "[AB]", [](Params p) -> Params { return {0.5f*p[0], 0.5f*p[0]}; }, 1.0f};
 	Rule r2 = {'B', "A", [](Params p) -> Params { return {2.0f*p[0]}; }, 1.0f};
 	Lsystem lsystem = {{{'A', {1.0f}}}, {r1, r2}, 'A', 1, 'B', 1};
