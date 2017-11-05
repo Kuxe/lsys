@@ -34,3 +34,4 @@
 # Build directories
 /release/
 /debug/
+/install/
