@@ -30,7 +30,7 @@ Lsystem& Lsystem::next(int n) {
 					//This is needed due to bug in gcc on windows, see:
 					//https://stackoverflow.com/questions/34680805/why-is-random-library-producing-the-same-results-every-time-when-using-stdun
 					using namespace std::chrono;
-					static std::default_random_engine gen{static_cast<long unsigned int>(high_resolution_clock::now().time_since_epoch().count())};
+					static std::default_random_engine gen{static_cast<unsigned int>(high_resolution_clock::now().time_since_epoch().count())};
 					static std::uniform_real_distribution<float> unidist(0.0f, 1.0f);
 					return unidist(gen);
 				}();

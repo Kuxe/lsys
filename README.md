@@ -1,4 +1,7 @@
 # lsys
+[![Build Status](https://travis-ci.org/Kuxe/lsys.svg?branch=master)](https://travis-ci.org/Kuxe/lsys)
+[![Build Status](https://ci.appveyor.com/api/projects/status/github/kuxe/lsys?svg=true)](https://ci.appveyor.com/project/Kuxe/lsys)
+
 lsys is a tiny C++ library which implements a bracketed, stochastic and parametric Lindenmayer system (L-system).
 
 ## Usage

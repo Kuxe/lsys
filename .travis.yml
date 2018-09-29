@@ -1,0 +1,29 @@
+# Disable spam
+notifications:
+  email: false
+# Enable C++ support
+language: cpp
+
+matrix:
+  include:
+    # Linux w/ gcc
+    - os: linux
+      compiler: gcc
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - gcc-5
+            - g++-5
+      # Use g++5
+      install:
+        - if [ "$CXX" = "g++" ]; then export CXX="g++-5" CC="gcc-5"; fi
+
+    # OSX w/ clang
+    - os: osx
+      compiler: clang
+
+# Build steps
+script:
+  - cmake . && cmake --build .
