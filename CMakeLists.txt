@@ -1,11 +1,30 @@
+cmake_minimum_required(VERSION 3.21 FATAL_ERROR)
+
 project(lsys)
-cmake_minimum_required(VERSION 2.8.7 FATAL_ERROR)
 
-add_compile_options(-std=c++14 -O3 -I.)
+set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 
-add_executable(example lsys.cpp example.cpp)
+include(GNUInstallDirs)
 
+# lsys-target
 add_library(lsys SHARED lsys.cpp)
+set_target_properties(lsys PROPERTIES
+	CXX_STANDARD 14
+	CXX_STANDARD_REQUIRED True
+	CXX_EXTENSIONS NO
+)
+target_include_directories(lsys PUBLIC
+	"$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
+	"$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>"
+)
 
-install(TARGETS lsys DESTINATION ${PROJECT_SOURCE_DIR}/install/bin)
-install(FILES lsys.hpp DESTINATION ${PROJECT_SOURCE_DIR}/install/include)
+include(lsys-install)
+
+# Example-target
+add_executable(example example.cpp)
+set_target_properties(example PROPERTIES
+	CXX_STANDARD 14
+	CXX_STANDARD_REQUIRED YES
+	CXX_EXTENSIONS NO
+)
+target_link_libraries(example PRIVATE lsys)

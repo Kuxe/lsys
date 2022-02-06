@@ -35,3 +35,14 @@
 /release/
 /debug/
 /install/
+build/
+out/
+
+# clangd-cache
+.cache/
+
+# vscode user-settings
+.vscode/
+
+# Generated
+compile_commands.json
