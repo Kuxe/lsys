@@ -20,11 +20,15 @@ target_include_directories(lsys PUBLIC
 
 include(lsys-install)
 
-# Example-target
-add_executable(example example.cpp)
-set_target_properties(example PROPERTIES
-	CXX_STANDARD 14
-	CXX_STANDARD_REQUIRED YES
-	CXX_EXTENSIONS NO
-)
-target_link_libraries(example PRIVATE lsys)
+# Add option that can be used to enable example-target.
+option(${PROJECT_NAME}_BUILD_EXAMPLES "Build examples." ON)
+if(${PROJECT_NAME}_BUILD_EXAMPLES)
+	# Example-target
+	add_executable(example example.cpp)
+	set_target_properties(example PROPERTIES
+		CXX_STANDARD 14
+		CXX_STANDARD_REQUIRED YES
+		CXX_EXTENSIONS NO
+	)
+	target_link_libraries(example PRIVATE lsys)
+endif()
